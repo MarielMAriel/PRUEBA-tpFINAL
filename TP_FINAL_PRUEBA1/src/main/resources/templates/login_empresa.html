@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head th:insert="/layout/head::head">
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	
+<!-- SE SACO EL THOBJET -->
+	<form th:action="@{/login}" th:object="${usuarioDelForm}" method="POST"  class="row g-3">
+		<div class="form-floating mb-3">
+			<input type="text" class="form-control" id="cuit" placeholder="ingrese cuit o dni" name="id">
+			<label for="cuit">Cuit</label>
+		</div>
+		<div class="form-floating">
+			<input type="password" class="form-control" id="contrasenia"
+				placeholder="Password" name="contrasenia">
+			<label for="contrasenia">Contrasenia</label>
+		</div>
+		<br>
+		<div class="col-12">
+			<button type="submit" class="btn btn-primary">Ingresar</button>
+		</div>
+	</form>
+	<br>
+		<a th:href="@{/NuevoEmpr}" id="eliminarConcursante" class="btn btn-danger">registrarme como empresa</a>
+		<a th:href="@{/NuevoUsu}" id="eliminarConcursante" class="btn btn-danger">registrarme como ciudadano</a>
+</body>
+
+</html>
