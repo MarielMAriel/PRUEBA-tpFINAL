@@ -40,7 +40,8 @@ public class EmpleadoController {
 		mav.addObject("provincias", provincias);
 		return mav;
 	}
-	@PostMapping("/guardarEmp")
+
+	@PostMapping( "/guardarEmpl" )
 	public ModelAndView guardarEmplNuevo(@Validated @ModelAttribute Empleado empleado, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			LOGGER.info("no se cumplen las validaciones "+empleado);
@@ -48,7 +49,7 @@ public class EmpleadoController {
 			return mav;
 		}
 		Usuario usuario = usuarioService.setearUsuarioi(empleado);
-		empleadoService.guardarEmplado(empleado);
+		empleadoService.guardarEmpleado(empleado);
 		usuarioService.crear(usuario);
 		LOGGER.info("se agrego con exito un nuevo registro a la BD");
 		ModelAndView mav=new  ModelAndView("redirect:/logEmpr");
@@ -62,6 +63,21 @@ public class EmpleadoController {
 		mav.addObject("usuario", usuar);
 		return mav;
 	*/
+	
+	
+	@GetMapping("/logEmpl")
+	public ModelAndView getLogeo() {
+		ModelAndView mav = new ModelAndView("login_empresa");
+		mav.addObject("login", empleadoService.getListaEmpleado());
+		LOGGER.info("se solicito la ventana para ingresar al sistema");
+		return mav;
+	}
+	@PostMapping("/loginC")
+	public ModelAndView getIndexEmpleado() {
+		ModelAndView mav = new ModelAndView("index_empleado");
+		return mav;
+	}
+	
 	@GetMapping("/listEmpl")
 	public ModelAndView getListaEmpleados() {
 		ModelAndView mav = new ModelAndView("lista_empleado");

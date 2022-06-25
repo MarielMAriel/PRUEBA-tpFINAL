@@ -15,10 +15,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import fi.unju.edu.ar.serviceImp.loginServiceImp;
 
 @Configuration
-public class WebSecurityConfig {
+public class WebSecurityConfigE {
 	
 	@Autowired
-	private AutenticacionSaccessHandler2 autenticacion;
+	private AutenticacionSaccessHandler autenticacion;
 	
 	String[] resourse = new String[] {
 			"/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/webjars/**"
@@ -28,16 +28,13 @@ public class WebSecurityConfig {
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers(resourse).permitAll()
-			//			.antMatchers("/", "/inicio","/NuevoEmpr","/guardarEmpresa","/NuevoUsu","/guardarEmp").permitAll()
-// guardarEmp es de EMpleado
-			.antMatchers("/", "/inicio","/NuevoUsu","/guardarEmpl").permitAll()
+			.antMatchers("/", "/inicio","/NuevoEmpr","/guardarEmpresa","/NuevoUsu","/guardarEmp").permitAll()
 			.anyRequest().authenticated()
 			.and()	
 		.formLogin()
-			.loginPage("/logEmpl").permitAll()
-			.failureUrl("/logEmpl?error")
-			.defaultSuccessUrl("/")
+			.loginPage("/logEmpr").permitAll()
 			.successHandler(autenticacion)
+			.failureUrl("/logEmpr?error=true")
 			.usernameParameter("id")
 			.usernameParameter("contrasenia")
 			.and()
