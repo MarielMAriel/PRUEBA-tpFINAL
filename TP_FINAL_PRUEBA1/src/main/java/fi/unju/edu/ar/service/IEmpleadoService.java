@@ -6,7 +6,7 @@ import fi.unju.edu.ar.entity.Empleado;
 
 public interface IEmpleadoService {
 	public Empleado getEmpleado();
-	public void guardarEmplado(Empleado empleado);
+	public void guardarEmpleado(Empleado empleado);
 	public List<Empleado>getListaEmpleado();
 		
 }
