@@ -18,36 +18,36 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class AutenticacionSaccessHandler2 implements AuthenticationSuccessHandler{
+public class AutenticacionSaccessHandler implements AuthenticationSuccessHandler{
 
 	private RedirectStrategy redirectStrategy=new DefaultRedirectStrategy();
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-//		boolean tipoEmpresa=false;
-		boolean tipoEmpleado=false;
+		boolean tipoEmpresa=false;
+		boolean tipoEmpledo=false;
 		Collection<? extends GrantedAuthority> authorities=authentication.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
-//			if (grantedAuthority.getAuthority().equals("empresa")) {
-//				tipoEmpresa=true;
-//				break;
-//			}else {
+			if (grantedAuthority.getAuthority().equals("empresa")) {
+				tipoEmpresa=true;
+				break;
+			}else {
 				if(grantedAuthority.getAuthority().equals("empleado")) {
-					tipoEmpleado=true;
+					tipoEmpledo=true;
 					break;
 				}
 			}
 			
-//		}
-//		if(tipoEmpresa) {
-//			redirectStrategy.sendRedirect(request, response,"/login");
-//		}else {
-			if(tipoEmpleado) {
-				redirectStrategy.sendRedirect(request, response,"/indexEmpl" );
 		}
+		if(tipoEmpresa) {
+			redirectStrategy.sendRedirect(request, response,"/sitioEmpresa");
+		}else {
+			if(tipoEmpledo) {
+				redirectStrategy.sendRedirect(request, response,"/indexEmpl" );
+			}
 		}
 	
 	
 	}
 
-//}
+}
